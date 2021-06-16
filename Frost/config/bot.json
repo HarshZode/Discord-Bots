@@ -1,6 +1,6 @@
 {
     "game": "[$]Frost",
-    "channel": "850226589467017306",
+    "channel": "CHANNEL_ID",
     "prefix": "$",
-    "token_bot": "ODQxNTI3NjU5NTQ0MDUxNzUy.YJoDtA.Z8sVFZoggId5LDmKBrPsTRieCgw" 
+    "token_bot": "TOKEN" 
 }
