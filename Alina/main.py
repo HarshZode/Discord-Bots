@@ -277,9 +277,17 @@ dab_reply =['<:dab:848785556129316885>','<a:dabcrazy3:849395998891311134>','<a:d
 
 alex_insult =['fuck you alex', 'Alex is a bitch',"you're ugly alex","you're ugly Alex",'Fuck you alex', 'Alex a bitch','fuck you alex','Shut up Alex', 'shut up alex', 'shut up Alex','stfu alex', 'alex stfu','Alex stfu', 'alex stfu']
 
+matt= ['matt','Matt','MATT']
+
+matt_reply = ['<:stab:875620208579055636>']
+
 stud =['stud','Stud','STUD']
 
 stud_reply =['<:drum2:849537773961609236>','<:drum-1:849536701730521109>']
+
+bispy = ['spy','Spy','SPY']
+
+bispy_reply =['<:Rainbowcat:854938973540974622>', '<:yeahcute:854938954452041729>']
 
 @client.event
 async def on_message(message):
@@ -291,22 +299,25 @@ async def on_message(message):
 
         file.writelines(f"{str(message.author.id)}\n")
         if counter > 7:
-            member = message.author
+            
             if message.author.id == 837285152698400798:
               return
             elif message.author.id == 837974929869111318:
               return
+            else:
+              var = discord.utils.get(message.guild.roles, name = "Muted")
+              if var in message.author.roles or message.author.bot == True:
+               return
+              else:
+             
+               embed = discord.Embed(title="Muted", description=f"{message.author.mention} was muted for 60 sec (`spamming`)", colour=discord.Colour.dark_purple())
+               await message.channel.send(embed=embed)
             
-            else :
-             var = discord.utils.get(message.guild.roles, name = "Muted")
-             embed = discord.Embed(title="Muted", description=f"{message.author.mention} was muted for 60 sec (`spamming`)", colour=discord.Colour.dark_purple())
-             await message.channel.send(embed=embed)
-            
-             await message.author.add_roles(var)
-             await asyncio.sleep(60)
-             embed = discord.Embed(title="Unmuted", description=f"{message.author.mention} ", colour=discord.Colour.dark_purple())
-             await message.channel.send(embed=embed)
-             await message.author.remove_roles(var)
+               await message.author.add_roles(var)
+               await asyncio.sleep(60)
+               embed = discord.Embed(title="Unmuted", description=f"{message.author.mention} ", colour=discord.Colour.dark_purple())
+               await message.channel.send(embed=embed)
+               await message.author.remove_roles(var)
   
   if message.author == client.user:
     return
@@ -314,7 +325,14 @@ async def on_message(message):
   if message.guild.id == 790495293069459466 or 838637875636600862 or 844851417830260756 or 813894466036957184 :
    if message.content.startswith('$hello'):
     await message.channel.send("Hello!")
-  
+
+   if message.content.startswith('showlist'):
+     var = discord.utils.get(message.guild.roles, name = "Muted")
+     if var in message.author.roles:
+       await message.channel.send('has rolse homies')
+     else:
+       await message.channel.send('Does not have the role')
+    
    if any (word in message.content for word in greetings):
     await message.channel.send(random.choice(greetings_back))
   
@@ -322,8 +340,8 @@ async def on_message(message):
     await message.channel.send(random.choice(what_are_you_doing_answer))
 
    if any (word in message.content for word in mee6):
-    await message.delete()
-    await message.channel.send(random.choice(mee6_insult))
+    # await message.delete()
+    await message.reply(random.choice(mee6_insult))
 
    if any (word in message.content for word in ily_msg):
     await message.channel.send(random.choice(ily_msg_reply))
@@ -501,6 +519,12 @@ async def on_message(message):
    if any (word in message.content for word in larry):
      await message.add_reaction(random.choice(larry_reply))
 
+   if any (word in message.content for word in bispy):
+     await message.add_reaction(random.choice(bispy_reply))
+
+   if any (word in message.content for word in matt):
+     await message.add_reaction(random.choice(matt_reply))
+
    if any (word in message.content for word in stud):
      await message.add_reaction("<:drum-1:849536701730521109>")
      await message.add_reaction("<:ddrums:849539509019607080>")
@@ -526,7 +550,21 @@ async def on_message(message):
      embed = discord.Embed(title="Unmuted", description=f"{message.author.mention} ", colour=discord.Colour.dark_purple())
      await message.channel.send(embed=embed)
      await message.author.remove_roles(var)
-    
+
+verify_emote = "✅"
+
+@client.event
+async def on_reaction_add(reaction, user):
+  ChID = '761174269144727572'
+  if reaction.message.channel.id != ChID:
+    return
+  if reaction.emoji == "🏃":
+    CSGO = discord.utils.get(user.server.roles, name="✪ Homies")
+    await client.add_roles(user, CSGO)
+      # Role = discord.utils.get(user.server.roles, name = "✪ Homies")
+      # await client.add_role(user,Role)
+      
+
   
 
   
